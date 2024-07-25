@@ -1,19 +1,22 @@
 import Select from "react-dropdown-select";
-import makes from "../../data/makes.json";
 import {Controller, useForm} from "react-hook-form";
-import {useDispatch, useSelector} from "react-redux";
-import {changeMakeFilter, changeRentalPriceFilter} from "../../redux/filter/slice";
-import {selectCar} from "../../redux/car/selectors";
-import {useEffect, useState} from "react";
-import {fetchCarsThunk} from "../../redux/car/operations";
+import {useDispatch} from "react-redux";
+
+import {
+  changeMakeFilter,
+  changeMileageFilter,
+  changeRentalPriceFilter,
+} from "../../redux/filter/slice";
+
+import makes from "../../data/makes.json";
 
 const CarDashboard = () => {
-  const cars = useSelector(selectCar);
-
   const {control, handleSubmit, setValue} = useForm({
     defaultValues: {
       make: "",
       rentalPrice: "",
+      minMileage: "",
+      maxMileage: "",
     },
   });
 
@@ -40,6 +43,7 @@ const CarDashboard = () => {
     console.log(data);
     dispatch(changeMakeFilter(data.make));
     dispatch(changeRentalPriceFilter(data.rentalPrice.toString()));
+    dispatch(changeMileageFilter({min: +data.minMileage, max: +data.maxMileage}));
   };
 
   return (
@@ -67,6 +71,16 @@ const CarDashboard = () => {
             onChange={changeRentalPrice}
           />
         )}
+      />
+      <Controller
+        name="minMileage"
+        control={control}
+        render={({field}) => <input {...field} type="number" />}
+      />
+      <Controller
+        name="maxMileage"
+        control={control}
+        render={({field}) => <input {...field} type="number" />}
       />
       <button type="submit">Search</button>
     </form>
