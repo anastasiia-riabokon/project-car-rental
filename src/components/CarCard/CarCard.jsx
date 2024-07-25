@@ -1,6 +1,5 @@
 const CarCard = (props) => {
   const {photoLink, address, type, rentalPrice, year, id, model, make} = props;
-  console.log(props);
   return (
     <>
       <img src={photoLink} alt={`${make} ${model}`} width={274} />
