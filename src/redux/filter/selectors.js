@@ -14,7 +14,7 @@ export const selectFilteredCars = createSelector(
         : true;
       const makeCondition = make ? car.make === make : true;
       const mileageCondition = car.mileage >= mileage.min && car.mileage <= mileage.max;
-      return {rentalPriceCondition, makeCondition, mileageCondition};
+      return rentalPriceCondition && makeCondition && mileageCondition;
     });
   }
 );
