@@ -5,6 +5,7 @@ const initialState = {
   items: [],
   isLoading: false,
   errorMessage: null,
+  isMore: true,
 };
 
 const slice = createSlice({
@@ -13,7 +14,8 @@ const slice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchCarsThunk.fulfilled, (state, action) => {
-        state.items = action.payload;
+        state.items = [...state.items, ...action.payload.cars];
+        state.isMore = action.payload.isMore;
       })
       .addMatcher(
         (action) => action.type.endsWith("pending"),
@@ -31,7 +33,7 @@ const slice = createSlice({
       )
       .addMatcher(
         (action) => action.type.endsWith("rejected"),
-        (state) => {
+        (state, action) => {
           state.isLoading = false;
           state.errorMessage = action.payload;
         }

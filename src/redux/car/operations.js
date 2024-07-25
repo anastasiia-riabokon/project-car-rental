@@ -11,7 +11,10 @@ export const fetchCarsThunk = createAsyncThunk("cars/fetchAll", async (option, t
         ...option,
       },
     });
-    return data;
+    return {
+      cars: data,
+      isMore: data.length === 12,
+    };
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
   }
