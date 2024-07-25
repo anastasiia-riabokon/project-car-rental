@@ -9,14 +9,16 @@ import {
 } from "../../redux/filter/slice";
 
 import makes from "../../data/makes.json";
+import {fetchCarsThunk} from "../../redux/car/operations";
+import {clearItems} from "../../redux/car/slice";
 
 const CarDashboard = () => {
   const {control, handleSubmit, setValue} = useForm({
     defaultValues: {
       make: "",
       rentalPrice: "",
-      minMileage: "",
-      maxMileage: "",
+      minMileage: undefined,
+      maxMileage: undefined,
     },
   });
 
@@ -25,7 +27,7 @@ const CarDashboard = () => {
   const optionsMake = makes.map((item) => ({value: item, label: item}));
 
   const prices = [];
-  for (let price = 20; price <= 300; price += 5) {
+  for (let price = 20; price <= 300; price += 10) {
     prices.push(price);
   }
 
@@ -40,10 +42,14 @@ const CarDashboard = () => {
   };
 
   const onSubmit = (data) => {
-    console.log(data);
+    dispatch(clearItems());
+    const minMileageValue = data.minMileage !== undefined ? data.minMileage : 0;
+    const maxMileageValue = data.maxMileage !== undefined ? data.maxMileage : 100000;
+
     dispatch(changeMakeFilter(data.make));
     dispatch(changeRentalPriceFilter(data.rentalPrice.toString()));
-    dispatch(changeMileageFilter({min: +data.minMileage, max: +data.maxMileage}));
+    dispatch(changeMileageFilter({min: +minMileageValue, max: +maxMileageValue}));
+    dispatch(fetchCarsThunk({}));
   };
 
   return (
