@@ -1,7 +1,14 @@
+import {cityAndCountry} from "../../helpers/address";
+import IconHeart from "../IconHeart/IconHeart";
+
 const CarCard = (props) => {
-  const {photoLink, address, type, rentalPrice, year, id, model, make} = props;
+  const {photoLink, address, type, rentalPrice, year, id, model, make, rentalCompany} = props;
+  const place = cityAndCountry(address);
   return (
     <>
+      <button type="button">
+        <IconHeart />
+      </button>
       <img src={photoLink} alt={`${make} ${model}`} width={274} />
       <span>
         <p>
@@ -10,13 +17,15 @@ const CarCard = (props) => {
         <p>{rentalPrice}</p>
       </span>
       <span>
-        <p>{address}</p>
-        <p>{type}</p>
-        <p>{year}</p>
-        <p>{id}</p>
-        <p>{model}</p>
-        <p>{make}</p>
+        <p>
+          {place.city} | {place.country} | {rentalCompany}
+        </p>
+        <p>
+          {type} | {id} | {model}
+        </p>
       </span>
+
+      <button type="button">Learn More</button>
     </>
   );
 };
