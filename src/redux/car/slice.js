@@ -11,6 +11,11 @@ const initialState = {
 const slice = createSlice({
   name: "car",
   initialState,
+  reducers: {
+    clearItems: () => {
+      return initialState;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchCarsThunk.fulfilled, (state, action) => {
@@ -42,3 +47,4 @@ const slice = createSlice({
 });
 
 export const carReducer = slice.reducer;
+export const {clearItems} = slice.actions;
