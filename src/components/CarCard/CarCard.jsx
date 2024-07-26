@@ -1,6 +1,20 @@
+import {useState} from "react";
 import {cityAndCountry} from "../../helpers/address";
+import ModalCar from "../ModalCar/ModalCar";
 
 const CarCard = (props) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [modalContent, setModalContent] = useState(null);
+
+  const handleOpenModal = () => {
+    setIsOpen(true);
+    setModalContent(props);
+  };
+
+  const handleCloseModal = () => {
+    setIsOpen(false);
+    setModalContent(null);
+  };
   const {photoLink, address, type, rentalPrice, year, id, model, make, rentalCompany} = props;
 
   const place = cityAndCountry(address);
@@ -23,7 +37,10 @@ const CarCard = (props) => {
         </p>
       </span>
 
-      <button type="button">Learn More</button>
+      <button type="button" onClick={handleOpenModal}>
+        Learn More
+      </button>
+      <ModalCar isOpen={isOpen} isClose={handleCloseModal} content={modalContent} />
     </>
   );
 };
