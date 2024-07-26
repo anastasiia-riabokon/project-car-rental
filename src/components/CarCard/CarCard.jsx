@@ -1,14 +1,12 @@
 import {cityAndCountry} from "../../helpers/address";
-import IconHeart from "../IconHeart/IconHeart";
 
 const CarCard = (props) => {
   const {photoLink, address, type, rentalPrice, year, id, model, make, rentalCompany} = props;
+
   const place = cityAndCountry(address);
+
   return (
     <>
-      <button type="button">
-        <IconHeart />
-      </button>
       <img src={photoLink} alt={`${make} ${model}`} width={274} />
       <span>
         <p>
