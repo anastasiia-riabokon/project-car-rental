@@ -4,7 +4,6 @@ import CarCard from "../../components/CarCard/CarCard";
 
 const FavoritePage = () => {
   const favCar = useSelector(selectItemsFavorite);
-  console.log(favCar);
   return (
     <div>
       <ul>

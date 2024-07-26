@@ -17,7 +17,6 @@ Modal.setAppElement("#root");
 
 const ModalCar = ({isOpen, isClose, content}) => {
   if (!content) return;
-  console.log(content);
   const {
     photoLink,
     address,
