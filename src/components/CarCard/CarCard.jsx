@@ -20,28 +20,38 @@ const CarCard = (props) => {
   const place = cityAndCountry(address);
 
   return (
-    <>
-      <img src={photoLink} alt={`${make} ${model}`} width={274} />
-      <span>
+    <div>
+      <div className="w-[274px] h-[268px] mb-[14px]">
+        <img
+          src={photoLink}
+          alt={`${make} ${model}`}
+          className="w-full h-full object-cover rounded-[14px]"
+        />
+      </div>
+      <span className="font-medium flex justify-between mb-2">
         <p>
-          {make} {model}, {year}
+          {make} <span className="accent">{model}</span>, {year}
         </p>
         <p>{rentalPrice}</p>
       </span>
-      <span>
-        <p>
-          {place.city} | {place.country} | {rentalCompany}
-        </p>
-        <p>
-          {type} | {id} | {model}
-        </p>
-      </span>
+      <div className="text-[14px] text-[rgba(18,20,23,0.50)] mb-[28px]">
+        <ul className="list mb-1">
+          <li className="item">{place.city}</li>
+          <li className="item">{place.country}</li>
+          <li className="item">{rentalCompany}</li>
+        </ul>
+        <ul className="list">
+          <li className="item">{type}</li>
+          <li className="item">{id}</li>
+          <li className="item">{model}</li>
+        </ul>
+      </div>
 
-      <button type="button" onClick={handleOpenModal}>
+      <button type="button" onClick={handleOpenModal} className="btnCustom w-full py-3">
         Learn More
       </button>
       <ModalCar isOpen={isOpen} isClose={handleCloseModal} content={modalContent} />
-    </>
+    </div>
   );
 };
 export default CarCard;

@@ -19,11 +19,15 @@ const CarList = ({filteredCars}) => {
     }
   };
   return (
-    <div>
-      <ul>
+    <div className="pt-[50px] pb-[100px]">
+      <ul className="flex gap-y-[50px] gap-x-[29px] flex-wrap justify-center">
         {filteredCars.map((item) => (
-          <li key={item.id}>
-            <button type="button" onClick={() => handleAddOrRemoveToFavorites(item)}>
+          <li key={item.id} className="relative">
+            <button
+              type="button"
+              onClick={() => handleAddOrRemoveToFavorites(item)}
+              className="absolute top-[14px] right-[14px]"
+            >
               <IconHeart
                 fill={favCar.some((fav) => fav.id === item.id) ? "blue" : "none"}
                 stroke={favCar.some((fav) => fav.id === item.id) ? "blue" : "white"}
