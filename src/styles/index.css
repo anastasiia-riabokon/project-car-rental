@@ -45,14 +45,6 @@ input[type="number"]::-webkit-outer-spin-button {
   transform: rotate(180deg);
 }
 
-.react-dropdown-select.select-custom-price .react-dropdown-select-dropdown {
-  max-height: 188px !important;
-}
-
-.react-dropdown-select.select-custom-make .react-dropdown-select-dropdown {
-  max-height: 272px !important;
-}
-
 .input-custom {
   outline: none;
   @apply custom-styles max-w-[160px];
