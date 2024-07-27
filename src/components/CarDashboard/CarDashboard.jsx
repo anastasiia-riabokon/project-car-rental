@@ -36,7 +36,7 @@ const CarDashboard = () => {
   const optionsMake = makes.map((item) => ({value: item, label: item}));
 
   const prices = [];
-  for (let price = 20; price <= 300; price += 10) {
+  for (let price = 20; price <= 1000; price += 10) {
     prices.push(price);
   }
 
@@ -124,7 +124,7 @@ const CarDashboard = () => {
                 />
               )}
             />
-            <p className="absolute inset-0 flex items-center pointer-events-none text-[18px] font-medium bg-[#F7F7FB] pl-[18px] z-20 border-none rounded-[14px] w-[90px]">
+            <p className="absolute inset-0 flex items-center pointer-events-none text-[18px] font-medium bg-[#F7F7FB] pl-[18px] z-[1] border-none rounded-[14px] w-[90px]">
               To {selectedPrice}$
             </p>
           </span>
