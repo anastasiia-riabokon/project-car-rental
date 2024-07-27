@@ -8,6 +8,7 @@ import {fetchCarsThunk} from "../../redux/car/operations";
 import CarDashboard from "../../components/CarDashboard/CarDashboard";
 import CarList from "../../components/CarList/CarList";
 import BtnLoadMore from "../../components/BtnLoadMore/BtnLoadMore";
+import {clearItems} from "../../redux/car/slice";
 
 const CatalogPage = () => {
   const [page, setPage] = useState(1);
@@ -17,6 +18,10 @@ const CatalogPage = () => {
 
   useEffect(() => {
     dispatch(fetchCarsThunk({page: page}));
+
+    return () => {
+      dispatch(clearItems());
+    };
   }, [dispatch, page]);
 
   const handleClick = () => {
