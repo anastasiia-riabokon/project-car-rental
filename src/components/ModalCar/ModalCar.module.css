@@ -1,0 +1,14 @@
+.caption {
+  @apply font-semibold leading-[20px] mb-2;
+}
+
+.subtext {
+  @apply text-[12px] text-[rgba(18,20,23,0.50)] leading-[18px];
+}
+
+.itemCondition {
+  border-radius: 35px;
+  background: #f9f9f9;
+  padding: 7px 14px;
+  @apply text-[12px];
+}

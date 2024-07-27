@@ -44,3 +44,7 @@ button {
   left: calc(100% + 6px);
   transform: translate(-50%, -50%);
 }
+
+body:has(.ReactModal__Overlay) {
+  overflow: hidden;
+}
