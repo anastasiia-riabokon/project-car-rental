@@ -6,6 +6,7 @@ import {
   changeMakeFilter,
   changeMileageFilter,
   changeRentalPriceFilter,
+  resetFilter,
 } from "../../redux/filter/slice";
 
 import makes from "../../data/makes.json";
@@ -17,7 +18,7 @@ import {useState} from "react";
 import {formattedNumber} from "../../helpers/formattedNumber";
 
 const CarDashboard = () => {
-  const {control, handleSubmit, setValue} = useForm({
+  const {control, handleSubmit, setValue, reset} = useForm({
     defaultValues: {
       make: "",
       rentalPrice: "",
@@ -57,6 +58,15 @@ const CarDashboard = () => {
     dispatch(changeRentalPriceFilter(data.rentalPrice.toString()));
     dispatch(changeMileageFilter({min: minMileageValue, max: maxMileageValue}));
     dispatch(fetchCarsThunk({}));
+    reset();
+    setSelectedPrice("");
+  };
+
+  const drop = () => {
+    reset();
+
+    setSelectedPrice("");
+    dispatch(resetFilter());
   };
 
   const handleChange = (name, value) => {
@@ -64,93 +74,100 @@ const CarDashboard = () => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-wrap gap-[18px] justify-center items-end"
-    >
-      <label>
-        <p className="label-custom">Car brand</p>
-        <Controller
-          name="make"
-          control={control}
-          render={({field}) => (
-            <StyledSelect
-              {...field}
-              options={optionsMake}
-              placeholder="Enter the text"
-              onChange={changeMake}
-              className="select-custom select-custom-make"
-              dropdownHandleRenderer={() => <CustomDropdownIndicator />}
-              style={{width: "224px"}}
-            />
-          )}
-        />
-      </label>
-      <label>
-        <p className="label-custom">Price/ 1 hour</p>
-        <span className="relative">
+    <div>
+      <button type="button" onClick={drop}>
+        reset
+      </button>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-wrap gap-[18px] justify-center items-end"
+      >
+        <label>
+          <p className="label-custom">Car brand</p>
           <Controller
-            name="rentalPrice"
+            name="make"
             control={control}
             render={({field}) => (
               <StyledSelect
                 {...field}
-                options={optionsRentalPrice}
-                placeholder="To $"
-                onChange={changeRentalPrice}
-                className="select-custom select-custom-price"
+                options={optionsMake}
+                placeholder="Enter the text"
+                onChange={changeMake}
+                clearable
+                className="select-custom"
                 dropdownHandleRenderer={() => <CustomDropdownIndicator />}
-                style={{width: "125px"}}
+                style={{width: "224px"}}
+                dropdownHeight="272px"
               />
             )}
           />
-          <p className="absolute inset-0 flex items-center pointer-events-none text-[18px] font-medium bg-[#F7F7FB] pl-[18px] z-20 border-none rounded-[14px] w-[90px]">
-            To {selectedPrice}$
-          </p>
-        </span>
-      </label>
-      <span>
-        <p className="label-custom">Car mileage / km</p>
-
-        <span className="flex">
-          <label className="relative">
+        </label>
+        <label>
+          <p className="label-custom">Price/ 1 hour</p>
+          <span className="relative">
             <Controller
-              name="minMileage"
+              name="rentalPrice"
               control={control}
               render={({field}) => (
-                <input
+                <StyledSelect
                   {...field}
-                  type="text"
-                  className="input-custom rounded-s-[14px] pl-[75px] border-r border-[rgba(138,138,137,0.2)]"
-                  onChange={(e) => handleChange("minMileage", e.target.value)}
-                  value={field.value}
+                  options={optionsRentalPrice}
+                  placeholder="To $"
+                  onChange={changeRentalPrice}
+                  className="select-custom"
+                  dropdownHandleRenderer={() => <CustomDropdownIndicator />}
+                  style={{width: "125px"}}
+                  dropdownHeight="188px"
                 />
               )}
             />
-            <p className="input-text">From</p>
-          </label>
-          <label className="relative">
-            <Controller
-              name="maxMileage"
-              control={control}
-              render={({field}) => (
-                <input
-                  {...field}
-                  type="text"
-                  className="input-custom rounded-e-[14px] pl-[52px]"
-                  onChange={(e) => handleChange("maxMileage", e.target.value)}
-                  value={field.value}
-                />
-              )}
-            />
-            <p className="input-text">To</p>
-          </label>
+            <p className="absolute inset-0 flex items-center pointer-events-none text-[18px] font-medium bg-[#F7F7FB] pl-[18px] z-20 border-none rounded-[14px] w-[90px]">
+              To {selectedPrice}$
+            </p>
+          </span>
+        </label>
+        <span>
+          <p className="label-custom">Car mileage / km</p>
+          <span className="flex">
+            <label className="relative">
+              <Controller
+                name="minMileage"
+                control={control}
+                render={({field}) => (
+                  <input
+                    {...field}
+                    type="text"
+                    className="input-custom rounded-s-[14px] pl-[75px] border-r border-[rgba(138,138,137,0.2)]"
+                    onChange={(e) => handleChange("minMileage", e.target.value)}
+                    value={field.value}
+                  />
+                )}
+              />
+              <p className="input-text">From</p>
+            </label>
+            <label className="relative">
+              <Controller
+                name="maxMileage"
+                control={control}
+                render={({field}) => (
+                  <input
+                    {...field}
+                    type="text"
+                    className="input-custom rounded-e-[14px] pl-[52px]"
+                    onChange={(e) => handleChange("maxMileage", e.target.value)}
+                    value={field.value}
+                  />
+                )}
+              />
+              <p className="input-text">To</p>
+            </label>
+          </span>
         </span>
-      </span>
-      <button type="submit" className="btn-custom p-[14px] w-[144px]">
-        Search
-      </button>
-    </form>
+        <button type="submit" className="btn-custom p-[14px] w-[144px]">
+          Search
+        </button>
+      </form>
+    </div>
   );
 };
 

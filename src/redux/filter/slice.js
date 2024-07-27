@@ -26,4 +26,5 @@ const slice = createSlice({
 });
 
 export const filterReducer = slice.reducer;
-export const {changeRentalPriceFilter, changeMakeFilter, changeMileageFilter} = slice.actions;
+export const {changeRentalPriceFilter, changeMakeFilter, changeMileageFilter, resetFilter} =
+  slice.actions;
