@@ -1,0 +1,35 @@
+.labelCustom {
+  line-height: 1.28;
+  @apply text-[#8A8A89] text-[14px] font-medium mb-2;
+}
+
+.custom-styles {
+  @apply bg-[#F7F7FB] text-[18px] font-medium;
+  line-height: 1.25;
+  height: 48px;
+}
+
+.selectCustom {
+  @apply custom-styles border-none rounded-[14px] px-[18px] !important;
+}
+
+.selectCustom:focus-within {
+  box-shadow: none !important;
+}
+
+.selectCustom svg {
+  transition: transform 500ms ease-in-out;
+}
+
+.selectCustom:focus-within svg {
+  transform: rotate(180deg);
+}
+
+.inputCustom {
+  outline: none;
+  @apply custom-styles max-w-[160px];
+}
+
+.inputText {
+  @apply absolute inset-0 flex items-center text-[18px] font-medium pl-6;
+}

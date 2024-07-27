@@ -13,43 +13,7 @@ input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
 }
 
-.btn-custom {
+.btnCustom {
   transition: background-color 250ms ease-in-out;
   @apply bg-[#3470FF] hover:bg-[#0B44CD] font-semibold text-[14px] text-white rounded-[14px];
-}
-
-.label-custom {
-  line-height: 1.28;
-  @apply text-[#8A8A89] text-[14px] font-medium mb-2;
-}
-
-.custom-styles {
-  @apply bg-[#F7F7FB] text-[18px] font-medium;
-  line-height: 1.25;
-  height: 48px;
-}
-
-.select-custom {
-  @apply custom-styles border-none rounded-[14px] px-[18px] !important;
-}
-
-.select-custom:focus-within {
-  box-shadow: none !important;
-}
-
-.select-custom svg {
-  transition: transform 500ms ease-in-out;
-}
-
-.select-custom:focus-within svg {
-  transform: rotate(180deg);
-}
-
-.input-custom {
-  outline: none;
-  @apply custom-styles max-w-[160px];
-}
-
-.input-text {
-  @apply absolute inset-0 flex items-center text-[18px] font-medium pl-6;
 }

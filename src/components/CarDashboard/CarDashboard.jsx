@@ -1,6 +1,7 @@
 import Select from "react-dropdown-select";
 import {Controller, useForm} from "react-hook-form";
 import {useDispatch} from "react-redux";
+import {useState} from "react";
 
 import {
   changeMakeFilter,
@@ -8,14 +9,16 @@ import {
   changeRentalPriceFilter,
   resetFilter,
 } from "../../redux/filter/slice";
+import {clearItems} from "../../redux/car/slice";
+import {fetchCarsThunk} from "../../redux/car/operations";
+
+import {formattedNumber} from "../../helpers/formattedNumber";
 
 import makes from "../../data/makes.json";
-import {fetchCarsThunk} from "../../redux/car/operations";
-import {clearItems} from "../../redux/car/slice";
 import CustomDropdownIndicator from "../CustomDropdownIndicator/CustomDropdownIndicator";
 import StyledSelect from "./StyledSelect";
-import {useState} from "react";
-import {formattedNumber} from "../../helpers/formattedNumber";
+
+import css from "./CarDashboard.module.css";
 
 const CarDashboard = () => {
   const {control, handleSubmit, setValue, reset} = useForm({
@@ -83,7 +86,7 @@ const CarDashboard = () => {
         className="flex flex-wrap gap-[18px] justify-center items-end"
       >
         <label>
-          <p className="label-custom">Car brand</p>
+          <p className={css.labelCustom}>Car brand</p>
           <Controller
             name="make"
             control={control}
@@ -94,7 +97,7 @@ const CarDashboard = () => {
                 placeholder="Enter the text"
                 onChange={changeMake}
                 clearable
-                className="select-custom"
+                className={css.selectCustom}
                 dropdownHandleRenderer={() => <CustomDropdownIndicator />}
                 style={{width: "224px"}}
                 dropdownHeight="272px"
@@ -103,7 +106,7 @@ const CarDashboard = () => {
           />
         </label>
         <label>
-          <p className="label-custom">Price/ 1 hour</p>
+          <p className={css.labelCustom}>Price/ 1 hour</p>
           <span className="relative">
             <Controller
               name="rentalPrice"
@@ -114,7 +117,7 @@ const CarDashboard = () => {
                   options={optionsRentalPrice}
                   placeholder="To $"
                   onChange={changeRentalPrice}
-                  className="select-custom"
+                  className={css.selectCustom}
                   dropdownHandleRenderer={() => <CustomDropdownIndicator />}
                   style={{width: "125px"}}
                   dropdownHeight="188px"
@@ -127,7 +130,7 @@ const CarDashboard = () => {
           </span>
         </label>
         <span>
-          <p className="label-custom">Car mileage / km</p>
+          <p className={css.labelCustom}>Car mileage / km</p>
           <span className="flex">
             <label className="relative">
               <Controller
@@ -137,13 +140,13 @@ const CarDashboard = () => {
                   <input
                     {...field}
                     type="text"
-                    className="input-custom rounded-s-[14px] pl-[75px] border-r border-[rgba(138,138,137,0.2)]"
+                    className={`${css.inputCustom}  rounded-s-[14px] pl-[75px] border-r border-[rgba(138,138,137,0.2)]`}
                     onChange={(e) => handleChange("minMileage", e.target.value)}
                     value={field.value}
                   />
                 )}
               />
-              <p className="input-text">From</p>
+              <p className={css.inputText}>From</p>
             </label>
             <label className="relative">
               <Controller
@@ -153,17 +156,17 @@ const CarDashboard = () => {
                   <input
                     {...field}
                     type="text"
-                    className="input-custom rounded-e-[14px] pl-[52px]"
+                    className={`${css.inputCustom} rounded-e-[14px] pl-[52px]`}
                     onChange={(e) => handleChange("maxMileage", e.target.value)}
                     value={field.value}
                   />
                 )}
               />
-              <p className="input-text">To</p>
+              <p className={css.inputText}>To</p>
             </label>
           </span>
         </span>
-        <button type="submit" className="btn-custom p-[14px] w-[144px]">
+        <button type="submit" className="btnCustom p-[14px] w-[144px]">
           Search
         </button>
       </form>
