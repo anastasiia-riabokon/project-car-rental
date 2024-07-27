@@ -11,6 +11,9 @@ import {
 import makes from "../../data/makes.json";
 import {fetchCarsThunk} from "../../redux/car/operations";
 import {clearItems} from "../../redux/car/slice";
+import CustomDropdownIndicator from "../CustomDropdownIndicator/CustomDropdownIndicator";
+import StyledSelect from "./StyledSelect";
+import {useState} from "react";
 
 const CarDashboard = () => {
   const {control, handleSubmit, setValue} = useForm({
@@ -23,6 +26,7 @@ const CarDashboard = () => {
   });
 
   const dispatch = useDispatch();
+  const [selectedPrice, setSelectedPrice] = useState("");
 
   const optionsMake = makes.map((item) => ({value: item, label: item}));
 
@@ -38,7 +42,9 @@ const CarDashboard = () => {
   };
 
   const changeRentalPrice = (selected) => {
-    setValue("rentalPrice", selected[0]?.value || "");
+    const value = selected[0]?.value || "";
+    setSelectedPrice(value);
+    setValue("rentalPrice", value);
   };
 
   const onSubmit = (data) => {
@@ -53,31 +59,51 @@ const CarDashboard = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Controller
-        name="make"
-        control={control}
-        render={({field}) => (
-          <Select
-            {...field}
-            options={optionsMake}
-            placeholder="Enter the text"
-            onChange={changeMake}
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="flex flex-wrap gap-[18px] justify-center items-end"
+    >
+      <label>
+        <p className="label-custom">Car brand</p>
+        <Controller
+          name="make"
+          control={control}
+          render={({field}) => (
+            <StyledSelect
+              {...field}
+              options={optionsMake}
+              placeholder="Enter the text"
+              onChange={changeMake}
+              className="select-custom select-custom-make"
+              dropdownHandleRenderer={() => <CustomDropdownIndicator />}
+              style={{width: "224px"}}
+            />
+          )}
+        />
+      </label>
+      <label>
+        <p className="label-custom">Car mileage / km</p>
+        <span className="relative">
+          <Controller
+            name="rentalPrice"
+            control={control}
+            render={({field}) => (
+              <StyledSelect
+                {...field}
+                options={optionsRentalPrice}
+                placeholder="To $"
+                onChange={changeRentalPrice}
+                className="select-custom select-custom-price"
+                dropdownHandleRenderer={() => <CustomDropdownIndicator />}
+                style={{width: "125px"}}
+              />
+            )}
           />
-        )}
-      />
-      <Controller
-        name="rentalPrice"
-        control={control}
-        render={({field}) => (
-          <Select
-            {...field}
-            options={optionsRentalPrice}
-            placeholder="To $"
-            onChange={changeRentalPrice}
-          />
-        )}
-      />
+          <p className="absolute inset-0 flex items-center pointer-events-none text-[18px] font-medium bg-[#F7F7FB] pl-[18px] z-20 border-none rounded-[14px] w-[90px]">
+            To {selectedPrice}$
+          </p>
+        </span>
+      </label>
       <Controller
         name="minMileage"
         control={control}
@@ -88,7 +114,9 @@ const CarDashboard = () => {
         control={control}
         render={({field}) => <input {...field} type="number" />}
       />
-      <button type="submit">Search</button>
+      <button type="submit" className="btn-custom p-[14px] w-[144px]">
+        Search
+      </button>
     </form>
   );
 };
