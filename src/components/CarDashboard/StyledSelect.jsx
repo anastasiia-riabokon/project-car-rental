@@ -24,6 +24,7 @@ const StyledSelect = styled(Select)`
     color: rgba(18, 20, 23, 0.2);
     padding: 0;
     margin-bottom: 8px;
+    transition: color 250ms ease-in-out;
   }
 
   .react-dropdown-select-item:last-child {
