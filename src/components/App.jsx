@@ -1,8 +1,11 @@
 import {Navigate, Route, Routes} from "react-router-dom";
-import HomePage from "../pages/HomePage/HomePage";
-import CatalogPage from "../pages/CatalogPage/CatalogPage";
-import FavoritePage from "../pages/FavoritePage/FavoritePage";
+import {lazy} from "react";
+
 import Layout from "./Layout/Layout";
+
+const HomePage = lazy(() => import("../pages/HomePage/HomePage"));
+const CatalogPage = lazy(() => import("../pages/CatalogPage/CatalogPage"));
+const FavoritePage = lazy(() => import("../pages/FavoritePage/FavoritePage"));
 
 function App() {
   return (

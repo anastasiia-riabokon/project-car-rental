@@ -2,19 +2,21 @@ import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 
 import {selectFilteredCars} from "../../redux/filter/selectors";
-import {selectIsMore} from "../../redux/car/selectors";
+import {selectErrorMessage, selectIsLoading, selectIsMore} from "../../redux/car/selectors";
 import {fetchCarsThunk} from "../../redux/car/operations";
+import {clearItems} from "../../redux/car/slice";
 
 import CarDashboard from "../../components/CarDashboard/CarDashboard";
 import CarList from "../../components/CarList/CarList";
 import BtnLoadMore from "../../components/BtnLoadMore/BtnLoadMore";
-import {clearItems} from "../../redux/car/slice";
 import Notification from "../../components/Notification/Notification";
 
 const CatalogPage = () => {
   const [page, setPage] = useState(1);
   const showLoadMore = useSelector(selectIsMore);
   const filteredCars = useSelector(selectFilteredCars);
+  const isLoading = useSelector(selectIsLoading);
+  const isError = useSelector(selectErrorMessage);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -33,9 +35,11 @@ const CatalogPage = () => {
   return (
     <div>
       <CarDashboard />
-      {filteredCars.length === 0 && <Notification text="Sorry! Result not found..." />}
-      <CarList filteredCars={filteredCars} />
-      {showLoadMore && <BtnLoadMore onClick={handleClick} />}
+      {filteredCars.length === 0 && !isLoading && (
+        <Notification text="Sorry! Result not found..." />
+      )}
+      {!isLoading && !isError && <CarList filteredCars={filteredCars} />}
+      {!isLoading && !isError && showLoadMore && <BtnLoadMore onClick={handleClick} />}
     </div>
   );
 };
