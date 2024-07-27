@@ -1,4 +1,5 @@
 import {Outlet} from "react-router-dom";
+
 import Navbar from "../Navbar/Navbar";
 import Container from "../Container/Container";
 import Section from "../Section/Section";

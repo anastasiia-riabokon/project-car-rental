@@ -1,6 +1,8 @@
 import {useState} from "react";
-import {cityAndCountry} from "../../helpers/address";
+
 import ModalCar from "../ModalCar/ModalCar";
+
+import {cityAndCountry} from "../../helpers/address";
 import {cutText} from "../../helpers/cutText";
 
 const CarCard = (props) => {

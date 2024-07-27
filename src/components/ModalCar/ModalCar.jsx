@@ -1,9 +1,10 @@
 import Modal from "react-modal";
 import {IoCloseOutline} from "react-icons/io5";
+
 import {cityAndCountry} from "../../helpers/address";
+import {formattedNumber} from "../../helpers/formattedNumber";
 
 import css from "./ModalCar.module.css";
-import {formattedNumber} from "../../helpers/formattedNumber";
 
 const customStyles = {
   content: {
