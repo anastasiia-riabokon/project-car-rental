@@ -8,7 +8,13 @@ body {
   @apply font-manrope;
 }
 
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
 .btn-custom {
+  transition: background-color 250ms ease-in-out;
   @apply bg-[#3470FF] hover:bg-[#0B44CD] font-semibold text-[14px] text-white rounded-[14px];
 }
 
@@ -17,10 +23,14 @@ body {
   @apply text-[#8A8A89] text-[14px] font-medium mb-2;
 }
 
-.select-custom {
+.custom-styles {
+  @apply bg-[#F7F7FB] text-[18px] font-medium;
   line-height: 1.25;
   height: 48px;
-  @apply bg-[#F7F7FB] border-none rounded-[14px] px-[18px] text-[18px] font-medium !important;
+}
+
+.select-custom {
+  @apply custom-styles border-none rounded-[14px] px-[18px] !important;
 }
 
 .select-custom:focus-within {
@@ -41,4 +51,13 @@ body {
 
 .react-dropdown-select.select-custom-make .react-dropdown-select-dropdown {
   max-height: 272px !important;
+}
+
+.input-custom {
+  outline: none;
+  @apply custom-styles max-w-[160px];
+}
+
+.input-text {
+  @apply absolute inset-0 flex items-center text-[18px] font-medium pl-6;
 }

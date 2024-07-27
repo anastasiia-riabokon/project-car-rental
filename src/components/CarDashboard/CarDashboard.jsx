@@ -104,16 +104,40 @@ const CarDashboard = () => {
           </p>
         </span>
       </label>
-      <Controller
-        name="minMileage"
-        control={control}
-        render={({field}) => <input {...field} type="number" />}
-      />
-      <Controller
-        name="maxMileage"
-        control={control}
-        render={({field}) => <input {...field} type="number" />}
-      />
+      <span>
+        <p className="label-custom">Car mileage / km</p>
+
+        <span className="flex">
+          <label className="relative">
+            <Controller
+              name="minMileage"
+              control={control}
+              render={({field}) => (
+                <input
+                  {...field}
+                  type="number"
+                  className="input-custom rounded-s-[14px] pl-[75px] border-r border-[rgba(138,138,137,0.2)]"
+                />
+              )}
+            />
+            <p className="input-text">From</p>
+          </label>
+          <label className="relative">
+            <Controller
+              name="maxMileage"
+              control={control}
+              render={({field}) => (
+                <input
+                  {...field}
+                  type="number"
+                  className="input-custom rounded-e-[14px] pl-[52px]"
+                />
+              )}
+            />
+            <p className="input-text">To</p>
+          </label>
+        </span>
+      </span>
       <button type="submit" className="btn-custom p-[14px] w-[144px]">
         Search
       </button>
