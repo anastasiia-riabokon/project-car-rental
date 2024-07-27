@@ -6,7 +6,7 @@ const FavoritePage = () => {
   const favCar = useSelector(selectItemsFavorite);
   return (
     <div>
-      <ul>
+      <ul className="flex gap-y-[50px] gap-x-[29px] flex-wrap justify-center">
         {favCar.map((item) => (
           <li key={item.idFav}>
             <CarCard {...item} />
