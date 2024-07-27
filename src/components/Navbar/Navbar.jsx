@@ -13,7 +13,7 @@ const Navbar = () => {
         <li className="navbar-end max-[1023px]:hidden">
           <CustomNavLink to="/favorite">Favorite</CustomNavLink>
         </li>
-        <l className="navbar-end min-[1024px]:hidden">
+        <li className="navbar-end min-[1024px]:hidden">
           <span className="dropdown dropdown-end">
             <span tabIndex={0} role="button" className="flex items-center">
               <svg
@@ -43,7 +43,7 @@ const Navbar = () => {
               </li>
             </ul>
           </span>
-        </l>
+        </li>
       </ul>
     </nav>
   );
