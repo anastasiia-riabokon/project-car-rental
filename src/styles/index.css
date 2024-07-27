@@ -13,8 +13,11 @@ input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
 }
 
+button {
+  transition: all 250ms ease-in-out;
+}
+
 .btnCustom {
-  transition: background-color 250ms ease-in-out;
   @apply bg-[#3470FF] hover:bg-[#0B44CD] font-semibold text-[14px] text-white rounded-[14px];
 }
 
