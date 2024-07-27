@@ -14,14 +14,15 @@ import {clearItems} from "../../redux/car/slice";
 import CustomDropdownIndicator from "../CustomDropdownIndicator/CustomDropdownIndicator";
 import StyledSelect from "./StyledSelect";
 import {useState} from "react";
+import {formattedNumber} from "../../helpers/formattedNumber";
 
 const CarDashboard = () => {
   const {control, handleSubmit, setValue} = useForm({
     defaultValues: {
       make: "",
       rentalPrice: "",
-      minMileage: undefined,
-      maxMileage: undefined,
+      minMileage: "",
+      maxMileage: "",
     },
   });
 
@@ -49,13 +50,17 @@ const CarDashboard = () => {
 
   const onSubmit = (data) => {
     dispatch(clearItems());
-    const minMileageValue = data.minMileage !== undefined ? data.minMileage : 0;
-    const maxMileageValue = data.maxMileage !== undefined ? data.maxMileage : 100000;
+    const minMileageValue = data.minMileage !== "" ? +data.minMileage.replaceAll(",", "") : 0;
+    const maxMileageValue = data.maxMileage !== "" ? +data.maxMileage.replaceAll(",", "") : 100000;
 
     dispatch(changeMakeFilter(data.make));
     dispatch(changeRentalPriceFilter(data.rentalPrice.toString()));
-    dispatch(changeMileageFilter({min: +minMileageValue, max: +maxMileageValue}));
+    dispatch(changeMileageFilter({min: minMileageValue, max: maxMileageValue}));
     dispatch(fetchCarsThunk({}));
+  };
+
+  const handleChange = (name, value) => {
+    setValue(name, formattedNumber(value));
   };
 
   return (
@@ -82,7 +87,7 @@ const CarDashboard = () => {
         />
       </label>
       <label>
-        <p className="label-custom">Car mileage / km</p>
+        <p className="label-custom">Price/ 1 hour</p>
         <span className="relative">
           <Controller
             name="rentalPrice"
@@ -115,8 +120,10 @@ const CarDashboard = () => {
               render={({field}) => (
                 <input
                   {...field}
-                  type="number"
+                  type="text"
                   className="input-custom rounded-s-[14px] pl-[75px] border-r border-[rgba(138,138,137,0.2)]"
+                  onChange={(e) => handleChange("minMileage", e.target.value)}
+                  value={field.value}
                 />
               )}
             />
@@ -129,8 +136,10 @@ const CarDashboard = () => {
               render={({field}) => (
                 <input
                   {...field}
-                  type="number"
+                  type="text"
                   className="input-custom rounded-e-[14px] pl-[52px]"
+                  onChange={(e) => handleChange("maxMileage", e.target.value)}
+                  value={field.value}
                 />
               )}
             />
@@ -144,4 +153,5 @@ const CarDashboard = () => {
     </form>
   );
 };
+
 export default CarDashboard;
