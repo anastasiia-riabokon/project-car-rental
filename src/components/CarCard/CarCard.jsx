@@ -1,6 +1,7 @@
 import {useState} from "react";
 import {cityAndCountry} from "../../helpers/address";
 import ModalCar from "../ModalCar/ModalCar";
+import {cutText} from "../../helpers/cutText";
 
 const CarCard = (props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,7 +31,7 @@ const CarCard = (props) => {
       </div>
       <span className="font-medium flex justify-between mb-2">
         <p>
-          {make} <span className="accent">{model}</span>, {year}
+          {cutText(make, 8)} <span className="accent">{cutText(model)}</span>, {year}
         </p>
         <p>{rentalPrice}</p>
       </span>
