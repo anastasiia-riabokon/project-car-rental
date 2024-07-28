@@ -41,7 +41,9 @@ const CarCard = (props) => {
         <ul className="list mb-1">
           <li className="item">{place.city}</li>
           <li className="item">{place.country}</li>
-          <li className="item">{rentalCompany}</li>
+          <li className="item">
+            {place.city.length >= 10 ? cutText(rentalCompany, 12) : rentalCompany}
+          </li>
         </ul>
         <ul className="list">
           <li className="item">{type}</li>
