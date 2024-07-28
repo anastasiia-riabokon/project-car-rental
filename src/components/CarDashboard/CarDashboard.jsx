@@ -1,4 +1,3 @@
-import Select from "react-dropdown-select";
 import {Controller, useForm} from "react-hook-form";
 import {useDispatch} from "react-redux";
 import {useState} from "react";
@@ -20,7 +19,7 @@ import StyledSelect from "./StyledSelect";
 import css from "./CarDashboard.module.css";
 
 const CarDashboard = () => {
-  const {control, handleSubmit, setValue, reset} = useForm({
+  const {control, handleSubmit, setValue} = useForm({
     defaultValues: {
       make: "",
       rentalPrice: "",
@@ -87,6 +86,7 @@ const CarDashboard = () => {
                 dropdownHandleRenderer={() => <CustomDropdownIndicator />}
                 style={{width: "224px"}}
                 dropdownHeight="272px"
+                closeOnSelect={true}
               />
             )}
           />
@@ -107,12 +107,12 @@ const CarDashboard = () => {
                   dropdownHandleRenderer={() => <CustomDropdownIndicator />}
                   style={{width: "125px"}}
                   dropdownHeight="188px"
+                  searchable={false}
+                  contentRenderer={() => <p>To {selectedPrice}$</p>}
+                  closeOnSelect={true}
                 />
               )}
             />
-            <p className="absolute inset-0 flex items-center pointer-events-none text-[18px] font-medium bg-[#F7F7FB] pl-[18px] z-[1] border-none rounded-[14px] w-[90px]">
-              To {selectedPrice}$
-            </p>
           </span>
         </label>
         <span>
