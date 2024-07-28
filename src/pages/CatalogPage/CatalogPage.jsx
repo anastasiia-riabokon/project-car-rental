@@ -10,6 +10,8 @@ import CarDashboard from "../../components/CarDashboard/CarDashboard";
 import CarList from "../../components/CarList/CarList";
 import BtnLoadMore from "../../components/BtnLoadMore/BtnLoadMore";
 import Notification from "../../components/Notification/Notification";
+import Section from "../../components/Section/Section";
+import Container from "../../components/Container/Container";
 
 const CatalogPage = () => {
   const [page, setPage] = useState(1);
@@ -34,12 +36,18 @@ const CatalogPage = () => {
   };
   return (
     <div>
-      <CarDashboard />
-      {filteredCars.length === 0 && !isLoading && (
-        <Notification text="Sorry! Result not found..." />
-      )}
-      <CarList filteredCars={filteredCars} />
-      {!isLoading && !isError && showLoadMore && <BtnLoadMore onClick={handleClick} />}
+      <Section>
+        <Container>
+          <>
+            <CarDashboard />
+            {filteredCars.length === 0 && !isLoading && (
+              <Notification text="Sorry! Result not found..." />
+            )}
+            <CarList filteredCars={filteredCars} />
+            {!isLoading && !isError && showLoadMore && <BtnLoadMore onClick={handleClick} />}
+          </>
+        </Container>
+      </Section>
     </div>
   );
 };
