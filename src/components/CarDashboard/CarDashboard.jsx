@@ -7,7 +7,6 @@ import {
   changeMakeFilter,
   changeMileageFilter,
   changeRentalPriceFilter,
-  resetFilter,
 } from "../../redux/filter/slice";
 import {clearItems} from "../../redux/car/slice";
 import {fetchCarsThunk} from "../../redux/car/operations";
@@ -61,15 +60,6 @@ const CarDashboard = () => {
     dispatch(changeRentalPriceFilter(data.rentalPrice.toString()));
     dispatch(changeMileageFilter({min: minMileageValue, max: maxMileageValue}));
     dispatch(fetchCarsThunk({}));
-    reset();
-    setSelectedPrice("");
-  };
-
-  const drop = () => {
-    reset();
-
-    setSelectedPrice("");
-    dispatch(resetFilter());
   };
 
   const handleChange = (name, value) => {
@@ -78,9 +68,6 @@ const CarDashboard = () => {
 
   return (
     <div>
-      <button type="button" onClick={drop}>
-        reset
-      </button>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-wrap gap-[18px] justify-center items-end"
@@ -96,7 +83,6 @@ const CarDashboard = () => {
                 options={optionsMake}
                 placeholder="Enter the text"
                 onChange={changeMake}
-                clearable
                 className={css.selectCustom}
                 dropdownHandleRenderer={() => <CustomDropdownIndicator />}
                 style={{width: "224px"}}
