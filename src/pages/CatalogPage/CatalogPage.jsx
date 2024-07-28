@@ -38,7 +38,7 @@ const CatalogPage = () => {
       {filteredCars.length === 0 && !isLoading && (
         <Notification text="Sorry! Result not found..." />
       )}
-      {!isLoading && !isError && <CarList filteredCars={filteredCars} />}
+      <CarList filteredCars={filteredCars} />
       {!isLoading && !isError && showLoadMore && <BtnLoadMore onClick={handleClick} />}
     </div>
   );
