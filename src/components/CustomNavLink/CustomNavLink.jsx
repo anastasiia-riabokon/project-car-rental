@@ -4,8 +4,8 @@ import {NavLink} from "react-router-dom";
 const CustomNavLink = ({to, children}) => {
   const buildLinkClass = ({isActive}) => {
     return clsx(
-      "hover:text-[#0B44CD] min-[1024px]:hover:text-[#B3E5FC] max-[767px]:text-[18px] transition-color duration-[250ms]",
-      isActive && "text-[#0B44CD] min-[1024px]:text-[#B3E5FC]"
+      "hover:text-[#0B44CD] hover:bg-white py-[4px] px-[12px] rounded-[8px]",
+      isActive && "text-[#0B44CD] bg-white"
     );
   };
 

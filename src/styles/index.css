@@ -13,7 +13,8 @@ input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
 }
 
-button {
+button,
+a {
   transition: all 250ms ease-in-out;
 }
 
