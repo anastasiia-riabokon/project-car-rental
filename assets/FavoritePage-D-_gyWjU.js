@@ -1,0 +1,1 @@
+import{m as r,j as a,C as t}from"./index-DO5ca-g0.js";import{s as i,S as o,C as x}from"./Section-CfGPUQx7.js";const c=()=>{const s=r(i);return a.jsx(o,{children:a.jsx(t,{children:a.jsx("ul",{className:"flex gap-y-[50px] gap-x-[29px] flex-wrap justify-center",children:s.map(e=>a.jsx("li",{children:a.jsx(x,{...e})},e.idFav))})})})};export{c as default};
