@@ -81,7 +81,7 @@ const ModalCar = ({isOpen, isClose, content}) => {
           </ul>
         </div>
 
-        <p className="mb-[24px] leading-5">{description}</p>
+        <p className="mb-[24px] leading-5 text-[14px]">{description}</p>
 
         <div className="mb-[24px]">
           <h2 className={css.caption}>Accessories and functionalities:</h2>

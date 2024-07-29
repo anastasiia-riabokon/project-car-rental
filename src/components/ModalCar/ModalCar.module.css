@@ -1,5 +1,5 @@
 .caption {
-  @apply font-semibold leading-[20px] mb-2;
+  @apply font-semibold leading-[20px] mb-2 text-[14px];
 }
 
 .subtext {
